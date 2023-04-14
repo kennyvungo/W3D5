@@ -9,7 +9,6 @@ class PolyTreeNode
     end
     
     def parent=(other_node)
-        # other_node.children.delete(self)
         if other_node == nil
             self.parent.children.delete(self)
             @parent = other_node
@@ -25,15 +24,48 @@ class PolyTreeNode
 
     end
     
-    def add_child
+    def add_child(child_node)
+        child_node.parent = self 
+    end
+    
+    def remove_child(child_node)
+        child_node.parent = nil
+    end
+
+
+    # def inspect
+    #     { 'value' => @value, 'parent_value' => @parent.value }.inspect
+    # end
+    #################################################
+    #Searchable
+    
+    #depth --- REcursive
+    def dfs(target_value)
+        return self if self == target_value
+
         
     end
     
-    def remove_child
-        
+    #breadth
+    def bfs(target_value) # %[f a g x]
+        queue = [self]
+
+        loop do
+            first = queue.shift
+            
+            return first if first == target_value
+            queue + self.children
+            queue.shift
+            return nil if queue.empty?
+
+        end
+
+
     end
-    
+
 end
+
+
 
 # node1 = PolyTreeNode.new(1)
 # node2 = PolyTreeNode.new(2)
