@@ -9,13 +9,17 @@ class PolyTreeNode
     end
     
     def parent=(other_node)
-        @parent = other_node
-        
-        other_node.parent = 
+        # other_node.children.delete(self)
+        if other_node == nil
+            self.parent.children.delete(self)
+            @parent = other_node
+        elsif @parent.nil?
+            @parent = other_node
+            other_node.children << self
 
-        if @parent.nil?
-
-        elsif !other_node.children.include?(self)
+        else 
+            self.parent.children.delete(self)
+            @parent = other_node
             other_node.children << self
         end
 
@@ -29,5 +33,12 @@ class PolyTreeNode
         
     end
     
-    
 end
+
+# node1 = PolyTreeNode.new(1)
+# node2 = PolyTreeNode.new(2)
+# node3 = PolyTreeNode.new(3)
+# node2.parent = node1
+# node2.parent = node3
+# p node1
+# node2.parent = node3
