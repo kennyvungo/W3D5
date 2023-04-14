@@ -1,4 +1,3 @@
 def testing
-asdfasdf
-
+    asdfasdf
 end
