@@ -15,7 +15,6 @@ class PolyTreeNode
         elsif @parent.nil?
             @parent = other_node
             other_node.children << self
-
         else 
             self.parent.children.delete(self)
             @parent = other_node
@@ -41,26 +40,26 @@ class PolyTreeNode
     
     #depth --- REcursive
     def dfs(target_value)
-        return self if self == target_value
-
-        
+        return nil if self.nil?
+        return self if self.value == target_value
+       
+        self.children.each do |child|
+            result = child.dfs(target_value)
+            return result unless result.nil?
+        end
+      return nil
     end
     
     #breadth
     def bfs(target_value) # %[f a g x]
         queue = [self]
-
         loop do
             first = queue.shift
-            
-            return first if first == target_value
-            queue + self.children
-            queue.shift
+            return first if first.value == target_value
+            queue.concat(first.children)
             return nil if queue.empty?
-
         end
-
-
+        
     end
 
 end
