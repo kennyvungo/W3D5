@@ -3,9 +3,10 @@ require 'byebug'
 
 class KnightPathFinder
 
-    attr_reader :root_node
+    attr_reader :root_node, :start_pos, :considered_positions
     def initialize(start_pos)
         @start_pos = start_pos
+        @considered_positions = [@start_pos]
         @root_node = PolyTreeNode.new(start_pos)
         # self.build_move_tree
     end
@@ -13,7 +14,7 @@ class KnightPathFinder
     def self.valid_moves(pos)
         r, c = pos
         possible_pos = []
-        #generate 8 possible positions 
+        #generate 8 possible positions
         possible_pos << [r+2,c+1]
         possible_pos << [r+2,c-1]
         possible_pos << [r-2,c+1]
@@ -28,13 +29,27 @@ class KnightPathFinder
     end
 
     def build_move_tree(node)
+        
+    end
 
+    def new_move_positions(pos)
+        new_pos = []
+
+        KnightPathFinder.valid_moves(pos).each do |v_pos|
+            new_pos << v_pos if considered_positions.none?(v_pos)
+            considered_positions << v_pos
+        end
+        return new_pos
     end
 
 end
 
 if $PROGRAM_NAME == __FILE__
-    p kpf = KnightPathFinder.new([0,0])
+    p kpf = KnightPathFinder.new([1,1])
 
-    p KnightPathFinder.valid_moves([7,7])
+    # p KnightPathFinder.valid_moves([7,7])
+    p kpf.new_move_positions([1,1])
+    p kpf.new_move_positions([2,3])
+
+
 end
