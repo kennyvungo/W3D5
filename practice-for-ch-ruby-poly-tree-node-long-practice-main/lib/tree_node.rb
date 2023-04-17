@@ -40,7 +40,7 @@ class PolyTreeNode
     
     #depth --- REcursive
     def dfs(target_value)
-        return nil if self.nil?
+        # return nil if self.nil?
         return self if self.value == target_value
        
         self.children.each do |child|
