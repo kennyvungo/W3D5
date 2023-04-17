@@ -37,7 +37,6 @@ class KnightPathFinder
                 first.add_child(PolyTreeNode.new(val))
              end
             queue.concat(first.children)
-
         end
     end
 
@@ -53,6 +52,9 @@ class KnightPathFinder
         return new_pos
     end
 
+    def find_path(t_node)
+        
+    end
 end
 
 if $PROGRAM_NAME == __FILE__
