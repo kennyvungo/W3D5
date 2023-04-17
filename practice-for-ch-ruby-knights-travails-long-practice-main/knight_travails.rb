@@ -52,14 +52,23 @@ class KnightPathFinder
         return new_pos
     end
 
-    def find_path(t_node)
-        
+    def trace_path_back(target)
+        end_node = find_path(target)
+        path = []
+        until end_node == nil
+            path << end_node.parent
+            end_node = end_node.parent
+        end
+        path.reverse
+    end
+
+    def find_path(end_pos)
+        root_node.dfs(end_pos)
     end
 end
 
 if $PROGRAM_NAME == __FILE__
-    p kpf = KnightPathFinder.new([1,1])
+    p kpf = KnightPathFinder.new([0,0])
     # p KnightPathFinder.valid_moves([7,7])
-    p kpf.build_move_tree
-
+    p kpf.trace_path_back([3,3])
 end
