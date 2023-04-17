@@ -28,8 +28,14 @@ class KnightPathFinder
         valids
     end
 
-    def build_move_tree(node)
-        
+    def build_move_tree(t_node)
+        queue = []
+        queue << new_move_positions(root_node.value)
+        until queue.first == t_node
+            
+
+
+        end
     end
 
     def new_move_positions(pos)
