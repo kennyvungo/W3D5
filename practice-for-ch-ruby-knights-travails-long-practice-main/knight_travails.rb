@@ -28,8 +28,17 @@ class KnightPathFinder
         valids
     end
 
-    def build_move_tree()
+    def build_move_tree
+        queue = []
+        queue << @root_node
+        until queue.empty?
+            first = queue.shift
+            new_move_positions(first.value).each do |val|
+                first.add_child(PolyTreeNode.new(val))
+             end
+            queue.concat(first.children)
 
+        end
     end
 
     def new_move_positions(pos)
@@ -38,7 +47,7 @@ class KnightPathFinder
         KnightPathFinder.valid_moves(pos).each do |v_pos|
             if !considered_positions.include?(v_pos)
                 new_pos << v_pos
-                considered_pos << v_pos
+                considered_positions << v_pos
             end
         end
         return new_pos
@@ -48,10 +57,7 @@ end
 
 if $PROGRAM_NAME == __FILE__
     p kpf = KnightPathFinder.new([1,1])
-
     # p KnightPathFinder.valid_moves([7,7])
-    p kpf.new_move_positions([1,1])
-    p kpf.new_move_positions([2,3])
-
+    p kpf.build_move_tree
 
 end
