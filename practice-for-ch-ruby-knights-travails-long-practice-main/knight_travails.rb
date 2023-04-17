@@ -28,16 +28,18 @@ class KnightPathFinder
         valids
     end
 
-    def build_move_tree(node)
-        
+    def build_move_tree()
+
     end
 
     def new_move_positions(pos)
         new_pos = []
 
         KnightPathFinder.valid_moves(pos).each do |v_pos|
-            new_pos << v_pos if considered_positions.none?(v_pos)
-            considered_positions << v_pos
+            if !considered_positions.include?(v_pos)
+                new_pos << v_pos
+                considered_pos << v_pos
+            end
         end
         return new_pos
     end
