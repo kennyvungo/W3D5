@@ -8,7 +8,7 @@ class KnightPathFinder
         @start_pos = start_pos
         @considered_positions = [@start_pos]
         @root_node = PolyTreeNode.new(start_pos)
-        # self.build_move_tree
+        self.build_move_tree
     end
 
     def self.valid_moves(pos)
@@ -54,9 +54,10 @@ class KnightPathFinder
 
     def trace_path_back(target)
         end_node = find_path(target)
-        path = []
-        until end_node == nil
-            path << end_node.parent
+        path = [end_node.value]
+        loop do
+            break if end_node.parent == nil
+            path << end_node.parent.value
             end_node = end_node.parent
         end
         path.reverse
@@ -68,7 +69,8 @@ class KnightPathFinder
 end
 
 if $PROGRAM_NAME == __FILE__
-    p kpf = KnightPathFinder.new([0,0])
+    kpf = KnightPathFinder.new([0,0])
     # p KnightPathFinder.valid_moves([7,7])
+    #  kpf.find_path([3,3])
     p kpf.trace_path_back([3,3])
 end
